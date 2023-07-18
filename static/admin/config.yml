@@ -1,0 +1,172 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+locale: de
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "wichtig"
+    label: "Datenschutz & CO."
+    format: "frontmatter"
+    extension: 'md'
+    folder: "content/wichtig"
+    create: true
+    sortable_fields: ["title"]
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+  - name: "seiten"
+    label: "Seiten"
+    format: "frontmatter"
+    extension: 'md'
+    folder: "content/seiten"
+    create: true
+    sortable_fields: ["title"]
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: false }
+      - label: "Landing"
+        name: "landing"
+        widget: "object"
+        fields:
+          - { label: "Landing Bild", name: "landingImage", widget: "image", required: false }
+          - { label: "Landing Titel", name: "landingTitle", widget: "string", required: false }
+          - { label: "Landing Subtitel", name: "landingSubtitle", widget: "markdown", required: false }
+      - label: "Inhaltsblock"
+        name: "content"
+        widget: "list"
+        fields:
+          - { label: "Titel", name: "title", widget: "string", required: false }
+          - { label: "Inhalt", name: "body", widget: "markdown", required: false }
+          - { label: "Bild", name: "image", widget: "image", required: false }
+          - { label: "Inhaltspositionierung", name: "position", widget: "select", options: ["links", "mitte", "rechts"], required: false }
+          - { label: "Hervorgehoben ?", name: "highlight", widget: "boolean", required: false }
+          - label: "Karten"
+            name: "cards"
+            widget: "list"
+            fields:
+              - { label: "Titel", name: "title", widget: "string", required: false }
+              - { label: "Inhalt", name: "body", widget: "markdown", required: false }
+              - { label: "Link", name: "link", widget: "string", required: false }
+              - { label: "Linktext", name: "linktext", widget: "string", required: false }
+              - { label: "Bild", name: "image", widget: "image", required: false }
+          - label: "Banner"
+            name: "banner"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", required: false} 
+              - { label: "Inhalt", name: "body", widget: "markdown", required: false }
+              - { label: "Link", name: "link", widget: "string", required: false }
+              - { label: "Linktext", name: "linktext", widget: "string", required: false }
+          - label: "Kundenmeinungen einbinden?"
+            name: "kundenmeinungen"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Kategorie", name: "category", widget: "select", options: ["Generell", "Moderation", "Poetry Slam", "Kleinkunst", "Workshops", "Kabarett"], required: false }
+              - { label: "Kundenmeinungen anzeigen ?", name: "show", widget: "boolean", required: false }
+          - { label: "Termine einbinden?", name: "termine", widget: "boolean", required: false }
+          - label: "Bild Gallerie"
+            name: "gallery"
+            widget: "list"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Bild", name: "image", widget: "image", required: false }
+              - { label: "Bildunterschrift", name: "caption", widget: "string", required: false }
+          - label: "Videos"
+            name: "videos"
+            widget: "list"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Video", name: "video", widget: "string", required: false }
+              - { label: "Video Untertitel", name: "caption", widget: "string", required: false }
+          - label: "Downloads"
+            name: "downloads"
+            widget: "list"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Datei", name: "file", widget: "file", required: false }
+              - { label: "Datei Untertitel", name: "caption", widget: "string", required: false }
+          - label: "Instagram"
+            name: "instagram"
+            widget: "boolean"
+            required: false
+            default: false
+
+  - name: "termine"
+    label: "Termine"
+    format: "frontmatter"
+    extension: 'md'
+    folder: "content/termine"
+    create: true
+    sortable_fields: ["title"]
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: false }
+      - { label: "Datum & Uhrzeit", name: "date", widget: "datetime", required: false }
+      - { label: "Ort", name: "ort", widget: "string", required: false }
+      - { label: "Ort", name: "location", widget: "map", required: false }
+      - { label: "Zusatzbemerkung", name: "zusatz", widget: "markdown", required: false }
+      - { label: "Link", name: "link", widget: "string", required: false }
+      - { label: "Linktext", name: "linktext", widget: "string", required: false }
+      - label: "Ersatztermin"
+        name: "alternativeDate"
+        widget: "object"
+        required: false
+        collapsed: true
+        fields:
+          - { label: "Ersatztermin anzeigen ?", name: "show", widget: "boolean", required: false, default: false }
+          - { label: "Ersatztermin", name: "alternativeDate", widget: "datetime", required: false }
+          - { label: "Ersatzort", name: "location", widget: "string", required: false }
+  - name: "kundenmeinungen"
+    label: "Kundenmeinungen"
+    format: "frontmatter"
+    extension: 'md'
+    folder: "content/kundenmeinungen"
+    create: true
+    sortable_fields: ["title"]
+    editor:
+      preview: false
+    fields:
+      - { label: "Titel", name: "title", widget: "string", required: false }
+      - { label: "Inhalt", name: "body", widget: "markdown", required: false }
+      - { label: "Firma", name: "company", widget: "string", required: false }
+      - { label: "Logo der Firma", name: "image", widget: "image", required: false }
+      - { label: "Kategorie", name: "category", widget: "select", options: ["Generell", "Moderation", "Poetry Slam", "Kleinkunst", "Workshops", "Kabarett"], required: false }
+  - name: "produkte"
+    label: "Produkte"
+    format: "frontmatter"
+    extension: 'md'
+    folder: "content/produkte"
+    create: true
+    sortable_fields: ["title", "price"]
+    editor:
+      preview: false
+    fields:
+      - { label: "ID", name: "id", widget: "string", required: true }
+      - { label: "Titel", name: "title", widget: "string", required: true }
+      - { label: "Inhalt", name: "description", widget: "markdown", required: false }
+      - { label: "Preis", name: "price", widget: "number", value_type: "float", required: true }
+      - label: "Angebot"
+        name: "reduction"
+        widget: "object"
+        required: false
+        collapsed: true
+        fields:
+          - { label: "Angebots Preis", name: "reduction_price", widget: "number", value_type: "float", required: false }
+          - { label: "Angebot endet am", name: "reduction_end", widget: "datetime", required: false }
+      - { label: "Bild", name: "image", widget: "image", required: false }
