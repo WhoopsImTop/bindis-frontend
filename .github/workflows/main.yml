@@ -16,7 +16,7 @@ jobs:
     - name: 🔨 Build Project
       run: |
         npm install
-        npm run build-only
+        npm run generate
             
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
@@ -25,6 +25,6 @@ jobs:
         username: bindis
         password: ${{ secrets.password }}
         local-dir: './dist/'
-        server-dir: 'public_html/woomanager/'
+        server-dir: 'public_html/onlineshop-2023/'
         port: 21
         protocol: ftps
