@@ -29,7 +29,7 @@ export default {
             title: "Spiele, Geschenke und zubehör für jedermann!",
             subtitle: "Willkommen im Online-Shop von Bindis Schaulädle",
             image: {
-              url: "https://api.bindis-schaulaedle.de/public/images/products/1688301776_sunflex-taucherset-dolphin1.jpg",
+              url: "https://api.bindis-schaulaedle.de/public/images/products/1689794204_sunflex-taucherset-dolphin1.jpg",
             },
             button: {
               text: "Jetzt stöbern",

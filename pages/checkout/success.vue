@@ -69,7 +69,8 @@ export default {
     },
   },
   mounted() {
-    this.cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    //remove cartItems from localstorage
+    localStorage.removeItem("cartItems");
     this.approveOrder();
   },
 

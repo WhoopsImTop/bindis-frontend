@@ -28,7 +28,7 @@
               <nuxt-link to="/datenschutz">Datenschutzerklaerung</nuxt-link>
             </p>
             <p>
-              <nuxt-link to="/ags">AGB's</nuxt-link>
+              <nuxt-link to="/agb">AGB's</nuxt-link>
             </p>
           </div>
         </div>

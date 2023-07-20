@@ -14,7 +14,6 @@
       </div>
     </div>
     <div class="products">
-        <h4>Ausgewählte Kategorie: {{ $route.params.slug }}</h4>
       <div class="error-notice" v-if="data.length === 0">
         <h2>Keine Produkte gefunden</h2>
         <p>Es wurden keine Produkte in dieser Kategorie gefunden.</p>
