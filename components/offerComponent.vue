@@ -81,6 +81,7 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   position: relative;
+  width: 100px;
 }
 
 .offer-content {
