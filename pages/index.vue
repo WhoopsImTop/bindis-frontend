@@ -46,10 +46,10 @@ export default {
                 subtitle: "Spiele für unterwegs",
                 images: [
                   {
-                    url: "https://bindis-schaulaedle.de/wp-content/uploads/2023/06/49203_Packshot-1.cms-50854-300-auto1-194x300.png",
+                    url: "https://api.bindis-schaulaedle.de/public/images/products/1689788657_49102_Packshot-f3324ff81.jpg",
                   },
                   {
-                    url: "https://bindis-schaulaedle.de/wp-content/uploads/2023/06/49102_Packshot-f3324ff81-172x300.jpg",
+                    url: "https://api.bindis-schaulaedle.de/public/images/products/1689788680_40535_Kniffel_Kids_Wuerfelspiel_Kinderspiel_72ppi_Packshot-9618309c1.jpg",
                   },
                 ],
                 button: {
@@ -62,10 +62,10 @@ export default {
                 subtitle: "Perfekt für das Schwimmbad oder den Strand",
                 images: [
                   {
-                    url: "https://bindis-schaulaedle.de/wp-content/uploads/2023/04/bema-schwimmfluegel-neopren-1-6j1-300x300.jpg",
+                    url: "https://api.bindis-schaulaedle.de/public/images/products/1689789995_bema-schwimmfluegel-neopren-1-6j1.jpg",
                   },
                   {
-                    url: "https://bindis-schaulaedle.de/wp-content/uploads/2023/05/47042_Tauchset_SHARK1-235x300.jpg",
+                    url: "https://api.bindis-schaulaedle.de/public/images/products/1689789007_47052_VP_V1.jpg",
                   },
                 ],
                 button: {
