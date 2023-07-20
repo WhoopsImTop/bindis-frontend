@@ -21,6 +21,7 @@
       <product-list-item
         v-else
         v-for="product in data"
+        v-show="product.status === 'published' || product.regular_price > 0"
         :key="product.id"
         :product="product"
       ></product-list-item>

@@ -81,7 +81,11 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   position: relative;
-  width: 100px;
+}
+
+.offer-image img {
+  width: auto;
+  height: 250px;
 }
 
 .offer-content {
@@ -111,7 +115,7 @@ export default {
   .offer-content {
     display: flex;
     flex-direction: column;
-    padding: 20px
+    padding: 20px;
   }
 
   .offer-images {

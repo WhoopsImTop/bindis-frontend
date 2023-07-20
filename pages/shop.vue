@@ -26,6 +26,7 @@
     <div class="products">
       <product-list-item
         v-for="product in products"
+        v-show="product.status === 'published' || product.regular_price > 0"
         :key="product.id"
         :product="product"
       ></product-list-item>
