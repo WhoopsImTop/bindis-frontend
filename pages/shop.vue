@@ -65,6 +65,8 @@ export default {
   async asyncData({ $axios, query}) {
     const response = await $axios.get("/products" + (query.search ? '/' + query.search : ''));
     const categories = await $axios.get("/categories");
+    //remove query from url
+    history.replaceState({}, null, "/shop");
     return {
       products: response.data.data,
       pages: response.data.links,

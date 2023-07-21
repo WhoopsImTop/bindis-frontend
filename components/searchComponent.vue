@@ -23,16 +23,16 @@
           width="70"
         />
         <img v-else src="/produktbild_fehlt.png" width="70" />
-        <div class="result-text">
-          <h4>{{ result.name }}</h4>
-          <p class="regular_price">{{ result.regular_price }}</p>
+        <div class="result_text">
+          <p class="result_title">{{ result.name }}</p>
+          <p class="regular_price">{{ result.regular_price }} €</p>
         </div>
       </nuxt-link>
     </div>
     <div class="result-container" v-if="loading">
       <div class="result">
         <div class="result-text">
-          <h4>Suche nach {{ this.search }}</h4>
+          <p class="result-title">Suche nach {{ this.search }}</p>
         </div>
       </div>
     </div>
@@ -56,13 +56,18 @@ export default {
         this.searchProducts();
       }, 500);
     },
+    redirectToSearch() {
+      this.$router.push("/produkt-suche/" + this.search);
+    },
     searchProducts() {
       this.loading = true;
       this.$axios
         .get("/products/" + this.search)
         .then((res) => {
           this.loading = false;
-          this.searchResults = res.data.data;
+          this.searchResults = res.data.data.filter((product) => {
+            return product.status != "draft";
+          })
         })
         .catch((err) => {
           this.loading = false;
@@ -101,7 +106,7 @@ export default {
     //trigger search when pressing enter
     document.addEventListener("keydown", (e) => {
       if (e.key == "Enter") {
-        this.searchProducts();
+        this.redirectToSearch();
       }
     });
 

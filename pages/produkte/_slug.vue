@@ -98,8 +98,8 @@
       </div>
     </div>
     <div class="content-container text-container">
-      <h2>Beschreibung</h2>
-      <div class="product-description" v-html="product.description"></div>
+      <h2 style="margin-bottom: 20px">Beschreibung</h2>
+      <p class="product-description" v-html="product.description"></p>
     </div>
   </div>
 </template>
@@ -198,6 +198,7 @@ export default {
 
 .selectableImage {
   width: 100px;
+  height: 100px;
   margin-right: 5px;
   background-color: var(--primary-light-gray);
   border: 1px solid var(--primary-light-gray);
@@ -257,7 +258,7 @@ export default {
 
 .stockLimitNotice {
   color: var(--danger-color);
-  font-size: 14px;
+  font-size: 18px;
   margin: 0;
 }
 
@@ -268,7 +269,7 @@ export default {
 
 .delivery-time {
   margin: 0 0 0 5px;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .addToCart input {

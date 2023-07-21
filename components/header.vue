@@ -18,15 +18,24 @@
         /></nuxt-link> -->
         <nuxt-link to="/shop"><span>Unsere Produkte</span></nuxt-link>
         <div class="categories" v-if="isMobile">
-        <h3 class="fixedTitle">Kategorien</h3>
-        <nuxt-link class="category" :to="'/produkt-kategorien/' + link.name" v-for="(link, index) in categories" :key="index">{{ link.name }}</nuxt-link>
+          <h3 class="fixedTitle">Kategorien</h3>
+          <nuxt-link
+            class="category"
+            :to="'/produkt-kategorien/' + link.name"
+            v-for="(link, index) in categories"
+            :key="index"
+            >{{ link.name }}</nuxt-link
+          >
         </div>
         <nuxt-link v-if="!isMobile" class="warenkorb" to="/warenkorb"
           ><img src="/cart.svg" height="30px" />
           <div class="cart-items">{{ cartItems.length }}</div>
         </nuxt-link>
       </div>
-      <div v-if="isMobile" style="display: flex; flex-direction: row; align-items: center">
+      <div
+        v-if="isMobile"
+        style="display: flex; flex-direction: row; align-items: center"
+      >
         <nuxt-link
           style="margin-right: 20px"
           v-if="isMobile"
@@ -91,10 +100,7 @@ export default {
       }
     },
     searchProduct() {
-      this.$router.push({
-        path: "/shop",
-        query: { search: this.productSearch },
-      });
+      this.$router.push("/produkt-suche/" + this.productSearch);
     },
     toggleMobileNav() {
       const nav = document.querySelector(".link-container");

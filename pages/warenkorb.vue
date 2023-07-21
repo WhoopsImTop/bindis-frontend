@@ -12,7 +12,6 @@
                     'https://api.bindis-schaulaedle.de/public/images/products/' +
                     item.images[0].src
                   "
-                  width="100"
                   style="margin-right: 10px"
                 />
               </div>
@@ -155,7 +154,7 @@ export default {
   padding: 20px;
   border: 1px solid var(--primary-light-gray);
   border-radius: 5px;
-  max-width: 250px;
+  width: max-content;
 }
 
 .cart-container {
@@ -234,7 +233,7 @@ export default {
   }
 
   .cart-total {
-    max-width: unset;
+    width: 100%;
   }
 
   .cart-buttons .button {

@@ -40,7 +40,7 @@
         <p style="font-size: 14px">© 2023 Bindis Schaulädle. All Rights Reserved.</p>
         <p style="font-size: 14px">
           Designed by
-          <a style="margin: 0; color: #0055b8; text-decoration: none;" href="https://elias-englen.de/"
+          <a style="margin: 0; color: #0055b8; text-decoration: none; font-size: 14px;" href="https://elias-englen.de/"
             >eliasenglen</a
           >
         </p>
