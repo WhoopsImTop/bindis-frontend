@@ -36,6 +36,17 @@
             </div>
           </div>
         </div>
+
+        <div class="cart-container-error-messages" v-if="cartErrorMessages">
+          <div
+            class="cart-item-error-message"
+            v-for="(message, index) in cartErrorMessages"
+            :key="index"
+          >
+            <p>{{ message }}</p>
+          </div>
+        </div>
+
         <div class="cart-container" style="padding: 50px 0" v-else>
           <h3>Dein Warenkorb ist gegenwärtig leer</h3>
           <p>Stöbere einfach nach Produkten.</p>
@@ -67,6 +78,7 @@ export default {
   data: () => {
     return {
       cartItems: [],
+      cartErrorMessages: [],
       cartInformations: {
         total_price: 0,
         products: [],
@@ -111,6 +123,9 @@ export default {
         })
         .then((res) => {
           this.cartInformations = res.data;
+          this.cartItems = res.data.products;
+          this.cartErrorMessages = res.data.error_messages;
+          localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
         })
         .catch((err) => console.log(err));
     },
@@ -195,6 +210,17 @@ export default {
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.cart-item-error-message {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: var(--danger-color);
+  margin: 10px 0;
+}
+
+.cart-item-error-message p {
+  color: var(--white);
 }
 
 @media (max-width: 1200px) {

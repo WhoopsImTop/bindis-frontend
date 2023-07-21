@@ -125,5 +125,6 @@ td {
 .product-price {
   font-weight: bold;
   color: var(--primary-color);
+  font-size: 18px;
 }
 </style>

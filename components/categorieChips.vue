@@ -1,6 +1,6 @@
 <template>
   <div class="content-container text-container">
-    <h2>Unsere Kategorien</h2>
+    <h2>{{ component.title }}</h2>
     <div class="categorie-container">
         <nuxt-link class="categorie-chip" :to="'/produkt-kategorien/' + categorie.name" v-for="categorie in categories" :key="categorie.slug">{{ categorie.name }}</nuxt-link>
     </div>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    props: ["categories"],
+    props: ["categories", "component"],
 }
 </script>
 

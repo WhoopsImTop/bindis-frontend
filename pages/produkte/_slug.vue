@@ -16,7 +16,11 @@
               v-show="product.images.length > 1"
               v-for="(image, index) in product.images"
               :key="index"
-              @click="productImage = 'https://api.bindis-schaulaedle.de/public/images/products/' + image.src"
+              @click="
+                productImage =
+                  'https://api.bindis-schaulaedle.de/public/images/products/' +
+                  image.src
+              "
             >
               <img
                 :src="
@@ -113,6 +117,20 @@ export default {
       failedToIncrease: false,
     };
   },
+
+  head() {
+    return {
+      title: this.product.name + " - Bindi's Schaulädle",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.product.description,
+        },
+      ],
+    };
+  },
+
   async asyncData({ $axios, params }) {
     const response = await $axios.get("/products/" + params.slug);
     const productImage =
@@ -333,7 +351,7 @@ export default {
   }
 
   .back-to-shop {
-    display: none
+    display: none;
   }
 }
 </style>

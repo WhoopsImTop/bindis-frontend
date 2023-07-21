@@ -62,6 +62,20 @@ export default {
       searchTimeout: null,
     };
   },
+
+  head() {
+    return {
+      title: "Bindi's Schaulädle - Shop",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Shop",
+        },
+      ],
+    };
+  },
+
   async asyncData({ $axios, query}) {
     const response = await $axios.get("/products" + (query.search ? '/' + query.search : ''));
     const categories = await $axios.get("/categories");

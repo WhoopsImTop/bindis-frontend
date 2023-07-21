@@ -8,8 +8,8 @@
   --dark-text: #000;
   --light-text: #fff;
 
-  --paragraph-text: 20px;
-  --paragraph-line-height: 34px;
+  --paragraph-text: 18px;
+  --paragraph-line-height: 32px;
 }
 
 @font-face {
@@ -29,33 +29,38 @@
 }
 
 h1 {
-  font-size: 60px;
-  line-height: 70px;
+  font-size: 40px;
+  line-height: 45px;
   font-weight: 900;
   color: var(--dark-text);
 }
 
 h2 {
-  font-size: 50px;
+  font-size: 30px;
   font-weight: 600;
-  margin-bottom: 10px;
   color: var(--dark-text);
 }
 
 h3 {
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 600;
   color: var(--dark-text);
 }
 
 h4 {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 2px;
   color: var(--dark-text);
 }
 
 p, a {
+  font-size: var(--paragraph-text);
+  line-height: var(--paragraph-line-height);
+  color: var(--dark-text);
+}
+
+span {
   font-size: var(--paragraph-text);
   line-height: var(--paragraph-line-height);
   color: var(--dark-text);
@@ -152,7 +157,7 @@ label {
 }
 
 .result_title {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 23px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -198,7 +203,7 @@ label {
   padding: 10px 20px;
   border-radius: 5px;
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 18px;
   background-color: var(--primary-light-gray);
 }
 
@@ -270,7 +275,7 @@ label {
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 23px;
   font-weight: 600;
   margin-top: 20px;
@@ -340,14 +345,16 @@ label {
 }
 
 .productListImage {
-  max-width: 250px;
-  min-height: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
 .productListImage img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .shop-grid-container {
@@ -410,7 +417,7 @@ label {
   color: var(--light-text);
   padding: 5px 10px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 15px;
   font-weight: 600;
   font-style: normal;
@@ -424,7 +431,7 @@ label {
   color: var(--light-text);
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 15px;
   font-weight: 600;
 }
@@ -460,7 +467,7 @@ label {
 
 .inStock p {
   margin-left: 5px;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 15px;
 }
 
@@ -471,7 +478,7 @@ label {
 }
 
 .mwst-notice {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 15px;
   color: #888888;
   margin-left: 10px;
@@ -494,6 +501,7 @@ label {
 .cart-item-image {
   width: 100px;
   height: 100px;
+  margin-right: 20px;
 }
 
 .cart-item-image img {

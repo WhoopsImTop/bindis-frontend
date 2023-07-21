@@ -4,7 +4,6 @@
     <div class="productSlider">
       <product-component
         v-for="product in products"
-        v-show="product.status != 'draft'"
         :product="product"
         :key="product.id"
         class="productSlider-item"

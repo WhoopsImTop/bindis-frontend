@@ -77,11 +77,11 @@ export default {
           },
           {
             type: "CategorieChips",
-            title: "Kategorien",
+            title: "Unsere top Kategorien🥇",
           },
           {
             type: "ProductSlider",
-            title: "Aktuelle Angebote",
+            title: "Eine kleine auswahl unserer Produkte",
             sale: false,
           },
         ],
@@ -195,7 +195,9 @@ export default {
         };
       }
       return {
-        products: response.data.data,
+        products: response.data.data.filter((product) => {
+          return product.status === "publish";
+        }),
       };
     } catch (e) {
       return {
@@ -205,10 +207,6 @@ export default {
   },
 
   beforeCreate() {
-    this.$axios.get("/products").then((response) => {
-      this.products = response.data.data;
-    });
-
     //get localstorage cart
     if (localStorage.getItem("cartItems")) {
       try {
