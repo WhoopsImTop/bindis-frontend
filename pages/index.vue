@@ -142,7 +142,7 @@ export default {
       }
       return {
         products: response.data.data.filter((product) => {
-          return product.status === "publish";
+          return product.status === "publish" || product.regular_price > 0;
         }),
       };
     } catch (e) {
