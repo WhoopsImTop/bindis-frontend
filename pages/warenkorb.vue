@@ -131,7 +131,7 @@ export default {
     },
   },
   beforeMount() {
-    this.cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    this.cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
     //check products on server if the quantity is still available
     this.cartItems.forEach((item) => {
       this.$axios
@@ -150,7 +150,7 @@ export default {
         //load cartItems from localstorage in vuex
         this.$store.commit(
           "loadCardItems",
-          JSON.parse(localStorage.getItem("cartItems"))
+          JSON.parse(localStorage.getItem("cartItems") || "[]")
         );
       } catch (e) {
         localStorage.removeItem("cartItems");
