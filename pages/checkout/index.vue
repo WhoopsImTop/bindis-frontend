@@ -211,6 +211,7 @@
               <button class="button" @click="generateCheckout()">
                 {{ loading ? "verarbeiten..." : "Kostenpflichtig Bestellen" }}
               </button>
+              <p v-if="checkout.errorMessage != ''" class="checkout-error-message">{{ checkout.errorMessage }}</p>
             </div>
           </div>
         </div>
@@ -254,6 +255,9 @@ export default {
       paymentMethod: null,
       loading: false,
       shippingCosts: 4.79,
+      checkout: {
+        errorMessage: "",
+      },
     };
   },
   methods: {
@@ -353,7 +357,7 @@ export default {
             }
           })
           .catch((error) => {
-            console.log(error);
+            this.checkout.errorMessage = error.response.data.message;
             this.loading = false;
           });
       } else {
@@ -565,5 +569,13 @@ export default {
 <style>
 .invalid {
   border: 1px solid var(--danger-color) !important;
+}
+
+.checkout-error-message {
+  background-color: var(--danger-color);
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 </style>
