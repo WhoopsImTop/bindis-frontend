@@ -58,7 +58,7 @@
       };
     },
     async asyncData({ $axios, params}) {
-      const response = await $axios.get("/products" + (params.slug ? '/' + params.slug : ''));
+      const response = await $axios.get("/products" + (params.slug ? '/' + params.slug : '') + '?status=publish');
       const categories = await $axios.get("/categories");
       //remove query from url
       history.replaceState({}, null, "/shop");
