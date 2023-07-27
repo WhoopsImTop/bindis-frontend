@@ -134,7 +134,7 @@ export default {
 
   async asyncData({ $axios }) {
     try {
-      const response = await $axios.get("/products");
+      const response = await $axios.get("/products/status/publish");
       if (response.status !== 200) {
         return {
           error: response.statusText,
