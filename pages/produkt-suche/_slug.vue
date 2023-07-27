@@ -70,7 +70,7 @@
     },
     methods: {
       async fetchPages(url) {
-        const response = await this.$axios.get(url);
+        const response = await this.$axios.get(url + '&status=publish');
         this.products = response.data.data;
         this.pages = response.data.links;
       },

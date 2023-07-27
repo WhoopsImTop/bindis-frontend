@@ -82,7 +82,7 @@ export default {
     },
   },
   async beforeMount() {
-    const categories = await this.$axios.get("/categories");
+    const categories = await this.$axios.get("/categories?status=publish");
     this.categories = categories.data.data;
     this.categories = this.categories.filter((category) => {
       return category.name !== "Unkategorisiert";
@@ -100,7 +100,7 @@ export default {
       }
     },
     searchProduct() {
-      this.$router.push("/produkt-suche/" + this.productSearch);
+      this.$router.push("/produkt-suche/" + this.productSearch + '?status=publish');
     },
     toggleMobileNav() {
       const nav = document.querySelector(".link-container");

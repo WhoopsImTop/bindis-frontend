@@ -59,8 +59,8 @@ export default {
   },
 
   async asyncData({ $axios, params }) {
-    const response = await $axios.get("/products/category/" + params.slug);
-    const categories = await $axios.get("/categories");
+    const response = await $axios.get("/products/category/" + params.slug + '?status=publish');
+    const categories = await $axios.get("/categories?status=publish");
     return {
       data: response.data.data,
       pages: response.data.links,
@@ -77,7 +77,7 @@ export default {
     searchProducts() {
       clearTimeout(this.searchTimeout);
       this.searchTimeout = setTimeout(() => {
-        this.$axios.get("/products/" + this.productSearch).then((response) => {
+        this.$axios.get("/products/" + this.productSearch + '?status=publish').then((response) => {
           this.products = response.data.data;
           this.pages = response.data.links;
         });

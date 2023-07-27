@@ -134,7 +134,7 @@ export default {
 
   async asyncData({ $axios }) {
     try {
-      const response = await $axios.get("/products/status/publish");
+      const response = await $axios.get("/products?status=publish");
       if (response.status !== 200) {
         return {
           error: response.statusText,
@@ -142,7 +142,7 @@ export default {
       }
       return {
         products: response.data.data.filter((product) => {
-          return product.status === "publish" || product.regular_price > 0;
+          return product.regular_price > 0;
         }),
       };
     } catch (e) {

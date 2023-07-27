@@ -77,8 +77,8 @@ export default {
   },
 
   async asyncData({ $axios, query}) {
-    const response = await $axios.get("/products" + (query.search ? '/' + query.search : ''));
-    const categories = await $axios.get("/categories");
+    const response = await $axios.get("/products" + (query.search ? '/' + query.search : '') + "?status=publish");
+    const categories = await $axios.get("/categories?status=publish");
     //remove query from url
     history.replaceState({}, null, "/shop");
     return {
