@@ -46,8 +46,7 @@ export default {
 
   methods: {
     approveOrder() {
-      let order_id = this.$route.query.order_id;
-      let order_number = this.$route.query.order_number;
+      let order_id = this.$route.query.order_number;
       let token = this.$route.query.token;
       let payerId = this.$route.query.PayerID ?? null;
       let payment_id = this.$route.query.paymentId ?? null;
@@ -55,7 +54,6 @@ export default {
       this.$axios
         .post("/payment/success", {
           order_id: order_id,
-          order_number: order_number,
           token: token,
           payer_id: payerId,
           payment_id: payment_id,

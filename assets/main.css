@@ -524,7 +524,7 @@ label {
 
 form input,
 form select,
-form textarea {
+textarea {
   padding: 10px 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -586,6 +586,11 @@ input[type='checkbox'] {
   padding: 20px 0;
 }
 
+.disabled-payment {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
 .payment-method p {
   margin-top: 10px;
 }
@@ -632,6 +637,21 @@ input[type='checkbox'] {
 .highlight {
   font-weight: 600;
   color: var(--primary-color);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col-50 {
+  width: calc(50% - 8px);
+}
+
+.col-50 input {
+  width: 100%;
 }
 
 /* footer */
@@ -968,11 +988,6 @@ input[type='checkbox'] {
     flex-direction: column;
   }
 
-  .checkout-products,
-  .checkout-products-headline {
-    display: none;
-  }
-
   textarea {
     height: 100px;
   }
@@ -1007,5 +1022,13 @@ input[type='checkbox'] {
     position: absolute;
     right: 10px;
     background-image: url('../static/search.svg');
+  }
+
+  .col-50 {
+    width: 100%;
+  }
+  
+  .col-50 input {
+    width: 100%;
   }
 }
