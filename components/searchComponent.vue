@@ -25,7 +25,7 @@
         <img v-else src="/produktbild_fehlt.png" width="70" />
         <div class="result_text">
           <p class="result_title">{{ result.name }}</p>
-          <p class="regular_price">{{ result.regular_price }} €</p>
+          <p class="regular_price">{{ formatNumber(result.regular_price) }} €</p>
         </div>
       </nuxt-link>
     </div>
@@ -50,6 +50,15 @@ export default {
     };
   },
   methods: {
+    formatNumber(number) {
+      let formatting_options = {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      };
+      let dollarString = new Intl.NumberFormat("de-DE", formatting_options);
+      return dollarString.format(number).slice(0, -1);
+    },
     triggerSearch() {
       clearTimeout(this.searchTimeout);
       this.searchTimeout = setTimeout(() => {
@@ -61,13 +70,15 @@ export default {
     },
     searchProducts() {
       this.loading = true;
+      //replace / with %2F to prevent 404 error
+      this.search = this.search.replace("/", "-");
       this.$axios
         .get("/products/" + this.search)
         .then((res) => {
           this.loading = false;
           this.searchResults = res.data.data.filter((product) => {
             return product.status != "draft";
-          })
+          });
         })
         .catch((err) => {
           this.loading = false;

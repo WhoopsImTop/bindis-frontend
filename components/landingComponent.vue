@@ -1,15 +1,8 @@
 <template>
-  <div
-    class="background"
-    :style="
-      component.backgroundImage
-        ? 'background-image: url(' + component.backgroundImage.url + ')'
-        : ''
-    "
-  >
+  <div class="background">
     <div class="content-container">
       <div class="row">
-        <div class="col-8">
+        <div class="col-4">
           <h1>{{ component.title }}</h1>
           <p>{{ component.subtitle }}</p>
           <nuxt-link
@@ -19,7 +12,7 @@
             >{{ component.button.text }}</nuxt-link
           >
         </div>
-        <div class="col-4" v-if="component.image">
+        <div class="col-8" v-if="component.image">
           <img :src="component.image.url" />
         </div>
       </div>
@@ -35,8 +28,15 @@ export default {
 </script>
 
 <style scoped>
-.col-4 img {
-  height: 400px;
+.col-4 {
+  width: 50%;
+}
+
+.col-8 {
+  width: 70%;
+}
+.col-8 img {
+  width: 100%;
 }
 .background {
   background-size: cover;
@@ -58,6 +58,18 @@ export default {
   }
   .col-4 img {
     height: 200px;
+  }
+
+  .col-4 {
+    width: 100%;
+  }
+
+  .col-8 {
+    width: 100%;
+  }
+  .col-8 img {
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 </style>

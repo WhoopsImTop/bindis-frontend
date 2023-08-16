@@ -10,6 +10,23 @@
         :style="translationStyle"
       ></product-component>
     </div>
+    <div class="product-slider-actions">
+      <button
+        class="action-button"
+        @click="currentSlide--"
+        :disabled="currentSlide === 0"
+      >
+        <img src="/left.svg" width="50" />
+      </button>
+
+      <button
+        class="action-button"
+        @click="currentSlide++"
+        :disabled="currentSlide === products.length - slidesToShow"
+      >
+        <img src="/right.svg" width="50" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -34,26 +51,55 @@ export default {
     },
   },
   mounted() {
-    //get the width of the product
-    this.productWidth = document.querySelector(".productSlider-item").offsetWidth + 10;
-    //set the interval to change the slide every 5 seconds
-    setInterval(() => {
-      this.currentSlide++;
-      //if the current slide is the last one, go back to the first slide
-      if (this.currentSlide === this.products.length) {
-        this.currentSlide = 0;
+    //make sure all items are rendered before calculating the width
+    this.$nextTick(() => {
+      //get the width of the product
+      let allItems = document.querySelectorAll(".productSlider-item");
+      //loop over them until we find the first one that is visible
+      for (let i = 0; i < allItems.length; i++) {
+        if (allItems[i].offsetWidth > 0) {
+          this.productWidth = allItems[i].offsetWidth + 10;
+          break;
+        }
       }
-    }, 5000);
+      setInterval(() => {
+        this.currentSlide++;
+        //if the current slide is the last one, go back to the first slide
+        if (this.currentSlide === this.products.length) {
+          this.currentSlide = 0;
+        }
+      }, 5000);
+    });
   },
 };
 </script>
 
-<style>
+<style scoped>
 .productSlider-item {
   transition: 0.5s ease-in-out;
 }
 .productSlider {
   overflow: hidden;
   margin: 20px 0;
+}
+
+.nuxt-link-active {
+  display: none;
+}
+
+.product-slider-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="content-container text-container shop-grid-container">
-    <div class="sidebar">
+    <div class="sidebar"><!-- 
       <div class="sidebar-item">
         <h4>Suche</h4>
         <input
@@ -10,7 +10,7 @@
           placeholder="Produkte suchen..."
           @input="searchProducts"
         />
-      </div>
+      </div> -->
       <div class="sidebar-item">
         <h4>Kategorien</h4>
         <hr class="sidebar-divider" />

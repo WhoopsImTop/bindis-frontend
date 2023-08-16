@@ -159,13 +159,13 @@
             <div class="checkout-product-information">
               <h4>{{ item.name }}</h4>
               <p style="min-width: 120px; text-align: right">
-                {{ item.quantity }} x {{ item.regular_price }} €
+                {{ item.quantity }} x {{ formatNumber(item.regular_price) }} €
               </p>
             </div>
           </div>
           <div class="zwischensumme">
             <p>Zwischensumme</p>
-            <p>{{ cartTotalWithoutShipping.toFixed(2) }} €</p>
+            <p>{{ formatNumber(cartTotalWithoutShipping) }} €</p>
           </div>
           <div
             class="zwischensumme"
@@ -173,7 +173,7 @@
           >
             <div style="display: flex; justify-content: space-between">
               <p>Versandkostenpauschale</p>
-              <p>{{ shippingCosts }} €</p>
+              <p>{{ formatNumber(shippingCosts) }} €</p>
             </div>
             <div class="row">
               <div
@@ -224,11 +224,11 @@
           </div>
           <div class="zwischensumme">
             <p>Gesamtsumme</p>
-            <p class="highlight">{{ cartTotal.toFixed(2) }} €</p>
+            <p class="highlight">{{ formatNumber(cartTotal) }} €</p>
           </div>
           <div class="mwst">
             <p>inkl. 19% MwSt.</p>
-            <p>{{ cartTax }} €</p>
+            <p>{{ formatNumber(cartTax) }} €</p>
           </div>
         </div>
 
@@ -294,6 +294,15 @@ export default {
     };
   },
   methods: {
+    formatNumber(number) {
+      let formatting_options = {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      };
+      let dollarString = new Intl.NumberFormat("de-DE", formatting_options);
+      return dollarString.format(number).slice(0, -1);
+    },
     validateCheckout() {
       let requiredFields = document.querySelectorAll(".required");
       let valid = false;

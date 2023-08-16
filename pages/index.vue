@@ -22,7 +22,7 @@ export default {
   layout: "default",
   data() {
     return {
-      page: {
+      /* page: {
         content: [
           {
             type: "landingComponent",
@@ -85,7 +85,7 @@ export default {
             sale: false,
           },
         ],
-      },
+      }, */
       categories: [
         {
           name: "Baby",
@@ -134,16 +134,41 @@ export default {
 
   async asyncData({ $axios }) {
     try {
+      let pushableComponents = [
+        {
+          type: "ProductSlider",
+          title: "Eine kleine auswahl unserer Produkte",
+          sale: false,
+        },
+      ];
       const response = await $axios.get("/products?status=publish");
+      const pageContent = await $axios.get(
+        "/website/getWebsiteData/startseite"
+      );
       if (response.status !== 200) {
         return {
           error: response.statusText,
         };
       }
+      if (pageContent.status !== 200) {
+        return {
+          error: pageContent.statusText,
+        };
+      }
+      pageContent.data.website_data = JSON.parse(
+        pageContent.data.website_data
+      ).content;
+      pushableComponents.forEach((component) => {
+        pageContent.data.website_data.push(component);
+      });
+      console.log(pageContent.data.website_data);
       return {
         products: response.data.data.filter((product) => {
           return product.regular_price > 0;
         }),
+        page: {
+          content: pageContent.data.website_data,
+        },
       };
     } catch (e) {
       return {

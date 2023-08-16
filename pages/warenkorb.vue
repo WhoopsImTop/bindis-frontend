@@ -17,7 +17,7 @@
               </div>
               <div class="cart-item-text">
                 <h4>{{ item.name }}</h4>
-                <p class="regular_price">{{ item.regular_price }} €</p>
+                <p class="regular_price">{{ formatNumber(item.regular_price) }} €</p>
               </div>
             </div>
             <div class="cart-item-actions row">
@@ -53,7 +53,7 @@
           <a class="button" href="/shop">zum Shop</a>
         </div>
         <div class="cart-total" v-if="cartItems.length > 0">
-          <h4>Gesamtpreis: {{ cartInformations.total_price.toFixed(2) }} €</h4>
+          <h4>Gesamtpreis: {{ formatNumber(cartInformations.total_price) }} €</h4>
           <p><span class="mwst-notice" style="margin: 0">inkl. MwSt</span></p>
           <p>
             <span class="mwst-notice" style="margin: 0"
@@ -96,6 +96,15 @@ export default {
     },
   },
   methods: {
+    formatNumber(number) {
+      let formatting_options = {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      };
+      let dollarString = new Intl.NumberFormat("de-DE", formatting_options);
+      return dollarString.format(number).slice(0, -1);
+    },
     removeFromCart(item) {
       this.cartItems = this.cartItems.filter((i) => i.id !== item.id);
       localStorage.setItem("cartItems", JSON.stringify(this.cartItems));

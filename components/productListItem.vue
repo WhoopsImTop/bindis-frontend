@@ -3,7 +3,13 @@
     <nuxt-link :to="'/produkte/' + product.slug" class="ProductListItem">
       <div class="salesBadge" v-if="onSale">Reduziert!</div>
       <div class="productListImage" v-if="product.images[0]">
-        <img loading="lazy" :src="'https://api.bindis-schaulaedle.de/public/images/products/' + product.images[0].src" />
+        <img
+          loading="lazy"
+          :src="
+            'https://api.bindis-schaulaedle.de/public/images/products/' +
+            product.images[0].src
+          "
+        />
       </div>
       <div class="productListImage" v-else>
         <img loading="lazy" src="/produktbild_fehlt.png" />
@@ -22,12 +28,12 @@
           class="regular_price"
           :style="onSale ? 'text-decoration: line-through' : ''"
         >
-          {{ product.regular_price }} €<span class="mwst-notice" v-if="!onSale"
+          {{ formatNumber(product.regular_price) }} €<span class="mwst-notice" v-if="!onSale"
             >inkl. MwSt</span
           >
         </p>
         <p class="sale_price" v-if="onSale">
-          {{ product.sale_price }} €<span class="mwst-notice" v-if="onSale"
+          {{ formatNumber(product.sale_price) }} €<span class="mwst-notice" v-if="onSale"
             >inkl. MwSt</span
           >
         </p>
@@ -48,6 +54,17 @@ export default {
     },
     inStock() {
       return this.product.quantity > 0;
+    },
+  },
+  methods: {
+    formatNumber(number) {
+      let formatting_options = {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      };
+      let dollarString = new Intl.NumberFormat("de-DE", formatting_options);
+      return dollarString.format(number).slice(0, -1);
     },
   },
 };

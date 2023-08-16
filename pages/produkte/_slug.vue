@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="content-container">
-      <nuxt-link class="back-to-shop" to="/shop"
+      <a class="back-to-shop" @click="goBack()"
         ><img src="/store.svg" width="25px" alt="zurück zum Shop" />zurück zum
-        Shop</nuxt-link
+        Shop</a
       >
-      <div class="product-page-grid">
+      <div class="product-page-grid" v-if="product">
         <div>
           <div class="product-image-container">
             <img :src="productImage" :alt="product.name" />
@@ -59,14 +59,16 @@
               class="regular_price product-price"
               :style="onSale ? 'text-decoration: line-through' : ''"
             >
-              {{ product.regular_price }} €<span
+              {{ formatNumber(product.regular_price) }} €<span
                 class="mwst-notice"
                 v-if="!onSale"
                 >inkl. MwSt</span
               >
             </p>
             <p class="sale_price product-price" v-if="onSale">
-              {{ product.sale_price }} €<span class="mwst-notice" v-if="onSale"
+              {{ formatNumber(product.sale_price) }} €<span
+                class="mwst-notice"
+                v-if="onSale"
                 >inkl. MwSt</span
               >
             </p>
@@ -105,6 +107,11 @@
       <h2 style="margin-bottom: 20px">Beschreibung</h2>
       <p class="product-description" v-html="product.description"></p>
     </div>
+    <ProductSlider
+      v-if="relatedProducts.length > 0"
+      :products="relatedProducts"
+      :component="{ title: 'Ähnliche Produkte' }"
+    ></ProductSlider>
   </div>
 </template>
 
@@ -115,10 +122,12 @@ export default {
       buttonLoading: false,
       cartQuantity: 1,
       failedToIncrease: false,
+      relatedProducts: [],
     };
   },
 
   head() {
+    if (this.product == null) return;
     return {
       title: this.product.name + " - Bindi's Schaulädle",
       meta: [
@@ -131,8 +140,12 @@ export default {
     };
   },
 
-  async asyncData({ $axios, params }) {
+  async asyncData({ $axios, params, redirect  }) {
     const response = await $axios.get("/products/" + params.slug);
+    //if response.data.data is empty, the product was not found
+    if (response.data.data.length == 0) {
+      redirect('/404');
+    }
     const productImage =
       response.data.data[0].images.length > 0
         ? "https://api.bindis-schaulaedle.de/public/images/products/" +
@@ -170,6 +183,26 @@ export default {
         this.buttonLoading = false;
       }, 1000);
     },
+    goBack() {
+      this.$router.go(-1);
+    },
+    formatNumber(number) {
+      let formatting_options = {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      };
+      let dollarString = new Intl.NumberFormat("de-DE", formatting_options);
+      return dollarString.format(number).slice(0, -1);
+    },
+    fetchRelatedCategoryProducts() {
+      this.$axios
+        .get("/products/category/" + this.product.categories[0].name)
+        .then((response) => {
+          this.relatedProducts = response.data.data;
+          console.log(this.relatedProducts);
+        });
+    },
   },
   beforeMount() {
     if (localStorage.getItem("cartItems")) {
@@ -183,6 +216,7 @@ export default {
         localStorage.removeItem("cartItems");
       }
     }
+    this.fetchRelatedCategoryProducts();
   },
 };
 </script>
@@ -262,6 +296,10 @@ export default {
   border-radius: 5px;
   background-color: var(--primary-light-gray);
   margin-top: 50px;
+}
+
+.back-to-shop:hover {
+  cursor: pointer;
 }
 
 .back-to-shop img {
