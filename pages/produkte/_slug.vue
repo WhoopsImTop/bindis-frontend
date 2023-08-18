@@ -140,11 +140,11 @@ export default {
     };
   },
 
-  async asyncData({ $axios, params, redirect  }) {
+  async asyncData({ $axios, params, redirect }) {
     const response = await $axios.get("/products/" + params.slug);
     //if response.data.data is empty, the product was not found
     if (response.data.data.length == 0) {
-      redirect('/404');
+      redirect("/404");
     }
     const productImage =
       response.data.data[0].images.length > 0
@@ -181,6 +181,7 @@ export default {
       this.$store.commit("setCartItems", productCopy);
       setTimeout(() => {
         this.buttonLoading = false;
+        this.$router.push("/warenkorb");
       }, 1000);
     },
     goBack() {

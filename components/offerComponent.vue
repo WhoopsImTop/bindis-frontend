@@ -39,15 +39,26 @@ export default {
   data() {
     return {
       currentSlide: 0,
+      offerWidth: 0,
     };
   },
   computed: {
     sliderOffset() {
-      let offset = 100 * this.currentSlide;
-      return `transform: translateX(-${offset}%)`;
+      return {
+        transform: `translateX(-${(this.currentSlide * this.offerWidth) + 30 * this.currentSlide}px)`,
+      };
     },
   },
   mounted() {
+    this.$nextTick(() => {
+      let allItems = document.querySelectorAll(".offer-block");
+      for (let i = 0; i < allItems.length; i++) {
+        if (allItems[i].offsetWidth > 0) {
+          this.offerWidth = allItems[i].offsetWidth;
+          break;
+        }
+      }
+    });
     setInterval(() => {
       this.currentSlide++;
       if (this.currentSlide >= this.component.content.length) {
